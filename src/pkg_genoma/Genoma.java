@@ -30,14 +30,14 @@ public class Genoma {
 		// Percorre o arquivo do genoma
 		while (data.hasNextLine()) {
 			String line = data.nextLine();
-			// Se é uma linha de cabeçalho ...
+			// Se ï¿½ uma linha de cabeï¿½alho ...
 			if (line.length() > 0 && line.charAt(0) == '>') {
-				if (begin != -1) { // Se já tem um Gene para montar, monta e armazena
+				if (begin != -1) { // Se jï¿½ tem um Gene para montar, monta e armazena
 					// Cria gene e acrescenta na lista
                     Gene gene = new Gene(locus,begin,end,sequence);
                     genes.add(gene);
                     
-                    // Limpa os campos para ler o próximo gene ...
+                    // Limpa os campos para ler o prï¿½ximo gene ...
 					locus = "";
 					begin = -1;
 					end = -1;
@@ -58,7 +58,7 @@ public class Genoma {
 						}
 					}
 				}
-			} else { // Se é uma linha de sequencia de gene ...
+			} else { // Se ï¿½ uma linha de sequencia de gene ...
 				for (int i = 0; i < line.length(); i++) {
 					sequence.add(line.charAt(i));
 				}
@@ -69,7 +69,7 @@ public class Genoma {
 
     public Genoma() throws FileNotFoundException{
     	genes = new LinkedList<>();
-    	loadData(new File("H37RvSequence.txt"));
+    	loadData(new File("sequence.txt"));
     }
     
     public List<Gene> getGenes(){
