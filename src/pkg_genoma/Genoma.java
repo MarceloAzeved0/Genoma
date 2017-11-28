@@ -16,7 +16,6 @@ import com.sun.org.apache.bcel.internal.generic.LSTORE;
 public class Genoma {
     private List<Gene> genes;
     
-    
 	private void loadData(File sourceFile) throws FileNotFoundException {
 		if (sourceFile == null) return;
 		
@@ -105,9 +104,11 @@ public class Genoma {
     	Genoma genoma;
 		try {
 			genoma = new Genoma();
+
 	    	System.out.println(genoma.getGenes().size());
 	    	
 	    	
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
