@@ -9,6 +9,10 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.sound.midi.Sequence;
+
+import com.sun.org.apache.bcel.internal.generic.LSTORE;
+
 public class Genoma {
     private List<Gene> genes;
     
@@ -26,7 +30,7 @@ public class Genoma {
 		long begin = -1;
 		long end = -1;
 		List<Character> sequence = new ArrayList<>(200);
-
+		List <String> sequenceString = new ArrayList<>();
 		// Percorre o arquivo do genoma
 		while (data.hasNextLine()) {
 			String line = data.nextLine();
@@ -60,13 +64,34 @@ public class Genoma {
 				}
 			} else { // Se � uma linha de sequencia de gene ...
 				for (int i = 0; i < line.length(); i++) {
+					
 					sequence.add(line.charAt(i));
+					
 				}
 			}
+			
 		}
+		
+			String palavra="";
+			 
+			 for(int j=0;j<sequence.size();j++) {
+				 palavra= palavra+sequence.get(j);
+				 if((j+1)%3==0) {
+					 System.out.println(j);
+					 sequenceString.add(palavra);
+					 palavra="";
+				 }
+			 }
+			
+		
+		for(int i =0;i<sequenceString.size();i++) {
+			System.out.println(sequenceString.get(i));
+		}
+		
 		data.close();
 	}
-
+	
+	
     public Genoma() throws FileNotFoundException{
     	genes = new LinkedList<>();
     	loadData(new File("sequence.txt"));
@@ -81,6 +106,8 @@ public class Genoma {
 		try {
 			genoma = new Genoma();
 	    	System.out.println(genoma.getGenes().size());
+	    	
+	    	
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
