@@ -12,7 +12,6 @@ import java.util.regex.Pattern;
 public class Genoma {
     private List<Gene> genes;
     
-    
 	private void loadData(File sourceFile) throws FileNotFoundException {
 		if (sourceFile == null) return;
 		
@@ -30,14 +29,14 @@ public class Genoma {
 		// Percorre o arquivo do genoma
 		while (data.hasNextLine()) {
 			String line = data.nextLine();
-			// Se ï¿½ uma linha de cabeï¿½alho ...
+			// Se é uma linha de cabeçalho ...
 			if (line.length() > 0 && line.charAt(0) == '>') {
 				if (begin != -1) { // Se jï¿½ tem um Gene para montar, monta e armazena
 					// Cria gene e acrescenta na lista
                     Gene gene = new Gene(locus,begin,end,sequence);
                     genes.add(gene);
                     
-                    // Limpa os campos para ler o prï¿½ximo gene ...
+                    // Limpa os campos para ler o próximo gene ...
 					locus = "";
 					begin = -1;
 					end = -1;
@@ -58,7 +57,7 @@ public class Genoma {
 						}
 					}
 				}
-			} else { // Se ï¿½ uma linha de sequencia de gene ...
+			} else { // Se é uma linha de sequencia de gene ...
 				for (int i = 0; i < line.length(); i++) {
 					sequence.add(line.charAt(i));
 				}
@@ -80,7 +79,7 @@ public class Genoma {
     	Genoma genoma;
 		try {
 			genoma = new Genoma();
-	    	System.out.println(genoma.getGenes().size());
+	    	System.out.println(genoma.getGenes());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
