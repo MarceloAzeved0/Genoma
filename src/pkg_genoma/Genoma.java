@@ -71,8 +71,10 @@ public class Genoma {
 			}
 			
 		}
-		System.out.println(mergeCharacter(sequence));
-		
+		List <String>lst = compareAminoacid(mergeCharacter(sequence));
+		for(int i = 0;i<lst.size();i++) {
+			System.out.println(lst.get(i));
+		}
 			
 			
 		
@@ -180,10 +182,13 @@ public class Genoma {
         }
         return  t;
     }
-	public String compareAminoacid(String codon) {
-		String am;
-		am = amino.getAminoacid(codon);
-		return am;
+	public List compareAminoacid(List <String> codon) {
+		List <String> amin = new ArrayList<>(200);
+		for(int i = 0; i<codon.size();i++) {
+			amin.add(amino.getAminoacid(codon.get(i)));
+		}
+		
+		return amin;
 	}
 	
 	
