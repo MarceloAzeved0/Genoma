@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -70,27 +71,115 @@ public class Genoma {
 			}
 			
 		}
+		System.out.println(mergeCharacter(sequence));
 		
 			
 			
 		
 		data.close();
 	}
-	public List lendoOrdem(List<String> sequence) {
-		List <String> sequenceString = new ArrayList<>();
-		String palavra="";
-		 
-		 for(int j=0;j<sequence.size();j++) {
-			 palavra= palavra+sequence.get(j);
-			 if((j+1)%3==0) {
-				 //System.out.println(j);
-				 sequenceString.add(palavra);
-				 
-				 palavra="";
-			 }
-		 }
-		 return sequenceString;
-	}
+	public List mergeCharacter(List<Character> lst) {
+        List<String> t = new ArrayList<>();
+        String palavra = "";
+        ListIterator<Character> it = lst.listIterator();
+
+        while(it.hasNext()) {
+            palavra = palavra + it.next();
+
+            if (palavra.length() % 3 == 0) {
+                t.add(palavra);
+                palavra = "";
+            }
+        }
+        return  t;
+    }
+
+    public List mergeCharacterPlusOne(List<Character> lst) {
+        List<String> t = new ArrayList<>();
+        String palavra = "";
+        ListIterator<Character> it = lst.listIterator();
+        it.next();
+
+        while(it.hasNext()) {
+            palavra = palavra + it.next();
+
+            if (palavra.length() % 3 == 0) {
+                t.add(palavra);
+                palavra = "";
+            }
+        }
+        return  t;
+
+    }
+
+    public List mergeCharacterPlusTwo(List<Character> lst) {
+        List<String> t = new ArrayList<>();
+        String palavra = "";
+        ListIterator<Character> it = lst.listIterator();
+        it.next();
+        it.next();
+
+        while(it.hasNext()) {
+            palavra = palavra + it.next();
+
+            if (palavra.length() % 3 == 0) {
+                t.add(palavra);
+                palavra = "";
+            }
+        }
+        return  t;
+
+    }
+    public List mergeCharacterContrario(List<Character> lst) {
+        List<String> t = new ArrayList<>();
+        String palavra = "";
+        ListIterator<Character> it = lst.listIterator(lst.size());
+
+        while(it.hasPrevious()) {
+            palavra = palavra + it.previous();
+
+            if (palavra.length() % 3 == 0) {
+                t.add(palavra);
+                palavra = "";
+            }
+        }
+        return  t;
+    }
+
+    public List mergeCharacterContrarioLessOne(List<Character> lst) {
+        List<String> t = new ArrayList<>();
+        String palavra = "";
+        ListIterator<Character> it = lst.listIterator(lst.size());
+        it.previous();
+
+        while(it.hasPrevious()) {
+            palavra = palavra + it.previous();
+
+            if (palavra.length() % 3 == 0) {
+                t.add(palavra);
+                palavra = "";
+            }
+        }
+        return  t;
+    }
+
+    public List mergeCharacterContrarioLessTwo(List<Character> lst) {
+        List<String> t = new ArrayList<>();
+        String palavra = "";
+        ListIterator<Character> it = lst.listIterator(lst.size());
+        it.previous();
+        it.previous();
+
+        while(it.hasPrevious()) {
+            palavra = palavra + it.previous();
+
+            if (palavra.length() % 3 == 0) {
+                t.add(palavra);
+                palavra = "";
+            }
+        }
+        return  t;
+    }
 	public String compareAminoacid(String codon) {
 		String am;
 		am = amino.getAminoacid(codon);
@@ -99,6 +188,7 @@ public class Genoma {
 	
 	
     public Genoma() throws FileNotFoundException{
+    	//List<Character> sequence = new ArrayList<>(200);
     	genes = new LinkedList<>();
     	loadData(new File("sequence.txt"));
     }
@@ -107,17 +197,7 @@ public class Genoma {
     	return genes;
     }
     
-    public static void main(String args[]){
-    	Genoma genoma;
-		try {
-			genoma = new Genoma();
-
-	    	System.out.println(genoma.getGenes().size());
-	    	
-	    	
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+    public static void main(String args[]) throws FileNotFoundException{
+        Genoma genoma = new Genoma();
     }
 }
