@@ -71,13 +71,15 @@ public class Genoma {
 			}
 			
 		}
-		List <String>lst = compareAminoacid(mergeCharacter(sequence));
+		/*List <String>lst = compareAminoacid(mergeCharacter(sequence));
 		for(int i = 0;i<lst.size();i++) {
 			System.out.println(lst.get(i));
 		}
-			
-			
+		int c =compareCorrect(lst);	
+		System.out.println(c);*/
 		
+		int a = compareMerge(sequence);
+		System.out.println(a);
 		data.close();
 	}
 	public List mergeCharacter(List<Character> lst) {
@@ -112,6 +114,28 @@ public class Genoma {
         }
         return  t;
 
+    }
+    public int compareMerge(List <Character>lst){
+    	int maior = 0;
+    	List<Integer> t = new ArrayList<>();
+    	
+    	t.add(compareCorrect(compareAminoacid(mergeCharacter(lst))));
+    	t.add(compareCorrect(compareAminoacid(mergeCharacterPlusOne(lst))));
+    	t.add(compareCorrect(compareAminoacid(mergeCharacterPlusTwo(lst))));
+    	t.add(compareCorrect(compareAminoacid(mergeCharacterContrario(lst))));
+    	t.add(compareCorrect(compareAminoacid(mergeCharacterContrarioLessOne(lst))));
+    	t.add(compareCorrect(compareAminoacid(mergeCharacterContrarioLessTwo(lst))));
+    	
+    	for(int i = 0; i<t.size();i++) {
+    		if(maior < t.get(i)) {
+    			maior = t.get(i);
+    		}
+    	}
+    	
+    	
+    	
+    	
+    	return maior;
     }
 
     public List mergeCharacterPlusTwo(List<Character> lst) {
@@ -189,6 +213,26 @@ public class Genoma {
 		}
 		
 		return amin;
+	}
+	public int compareCorrect(List<String> amin) {
+		
+		for(int i = 0;i<amin.size();i++) {
+			if(amin.get(i)== "Met") {
+				return contaDistancia(amin,i);
+			}
+		}
+		return 0;
+	}
+	private int contaDistancia(List<String> amin,int inicia) {
+		int count=0;
+		for( ;inicia<amin.size();inicia++) {
+			if(amin.get(inicia)!="Stop") {
+				count++;
+			}else {
+				return count;
+			}
+		}
+		return count;
 	}
 	
 	
