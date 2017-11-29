@@ -7,7 +7,7 @@ public class AminoacidTable {
 	private static AminoacidTable este = null;
 	private Map<String, String> aminoacidTable;
 	
-	private AminoacidTable() {
+	public AminoacidTable() {
 		aminoacidTable = new HashMap<String, String>();
         populateAminoacidTable();
 	}

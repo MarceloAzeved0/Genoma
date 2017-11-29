@@ -15,7 +15,7 @@ import com.sun.org.apache.bcel.internal.generic.LSTORE;
 
 public class Genoma {
     private List<Gene> genes;
-    
+    AminoacidTable amino = new AminoacidTable();
 	private void loadData(File sourceFile) throws FileNotFoundException {
 		if (sourceFile == null) return;
 		
@@ -71,23 +71,30 @@ public class Genoma {
 			
 		}
 		
-			String palavra="";
-			 
-			 for(int j=0;j<sequence.size();j++) {
-				 palavra= palavra+sequence.get(j);
-				 if((j+1)%3==0) {
-					 System.out.println(j);
-					 sequenceString.add(palavra);
-					 palavra="";
-				 }
-			 }
+			
 			
 		
-		for(int i =0;i<sequenceString.size();i++) {
-			System.out.println(sequenceString.get(i));
-		}
-		
 		data.close();
+	}
+	public List lendoOrdem(List<String> sequence) {
+		List <String> sequenceString = new ArrayList<>();
+		String palavra="";
+		 
+		 for(int j=0;j<sequence.size();j++) {
+			 palavra= palavra+sequence.get(j);
+			 if((j+1)%3==0) {
+				 //System.out.println(j);
+				 sequenceString.add(palavra);
+				 
+				 palavra="";
+			 }
+		 }
+		 return sequenceString;
+	}
+	public String compareAminoacid(String codon) {
+		String am;
+		am = amino.getAminoacid(codon);
+		return am;
 	}
 	
 	
