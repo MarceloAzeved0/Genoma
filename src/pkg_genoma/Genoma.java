@@ -36,7 +36,7 @@ public class Genoma {
 			String line = data.nextLine();
 			// Se � uma linha de cabe�alho ...
 			if (line.length() > 0 && line.charAt(0) == '>') {
-				if (begin != -1) { // Se j� tem um Gene para montar, monta e armazena
+				if (begin != -1) { // Se ja tem um Gene para montar, monta e armazena
 					// Cria gene e acrescenta na lista
                     Gene gene = new Gene(locus,begin,end,sequence);
                     genes.add(gene);
@@ -78,8 +78,10 @@ public class Genoma {
 		int c =compareCorrect(lst);	
 		System.out.println(c);*/
 		
-		int a = compareMerge(sequence);
-		System.out.println(a);
+		List<String> sequenciaCorreta = compareMerge(sequence);
+		for(int i=0;i<sequenciaCorreta.size();i++){
+			//System.out.println(sequenciaCorreta.get(i));
+		}
 		data.close();
 	}
 	public List mergeCharacter(List<Character> lst) {
@@ -115,7 +117,8 @@ public class Genoma {
         return  t;
 
     }
-    public int compareMerge(List <Character>lst){
+    public List<String> compareMerge(List <Character>lst){
+    	
     	int maior = 0;
     	List<Integer> t = new ArrayList<>();
     	
@@ -132,13 +135,26 @@ public class Genoma {
     		}
     	}
     	
-    	
-    	
-    	
-    	return maior;
+    	return enviarListaCorreta(maior,lst);
     }
 
-    public List mergeCharacterPlusTwo(List<Character> lst) {
+    private List<String> enviarListaCorreta(int maior, List<Character> lst) {
+		if(compareCorrect(compareAminoacid(mergeCharacter(lst)))==maior){
+			return compareAminoacid(mergeCharacter(lst));
+		}else if(compareCorrect(compareAminoacid(mergeCharacterPlusOne(lst))) == maior){
+			return compareAminoacid(mergeCharacterPlusOne(lst));
+		}else if(compareCorrect(compareAminoacid(mergeCharacterPlusTwo(lst))) == maior){
+			return compareAminoacid(mergeCharacterPlusTwo(lst));
+		}else if(compareCorrect(compareAminoacid(mergeCharacterContrario(lst)))==maior){
+			return compareAminoacid(mergeCharacterContrario(lst));
+		}else if(compareCorrect(compareAminoacid(mergeCharacterContrarioLessOne(lst)))==maior){
+			return compareAminoacid(mergeCharacterContrarioLessOne(lst));
+		}else if(compareCorrect(compareAminoacid(mergeCharacterContrarioLessTwo(lst)))==maior){
+			return compareAminoacid(mergeCharacterContrarioLessTwo(lst));
+		}
+		return null;
+	}
+	public List mergeCharacterPlusTwo(List<Character> lst) {
         List<String> t = new ArrayList<>();
         String palavra = "";
         ListIterator<Character> it = lst.listIterator();
@@ -248,5 +264,6 @@ public class Genoma {
     
     public static void main(String args[]) throws FileNotFoundException{
         Genoma genoma = new Genoma();
+        System.out.println(genoma.toString());
     }
 }
